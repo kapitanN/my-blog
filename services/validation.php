@@ -29,7 +29,7 @@ $password = htmlspecialchars($password);
 $login = trim($login);
 $password = trim($password);
 // подключаемся к базе
-require "includes/config.php";
+require "../includes/config.php";
 
 $result = mysqli_query($connection,"SELECT * FROM `users` WHERE login='$login'"); //извлекаем из базы все данные о пользователе с введенным логином
 $myrow = mysqli_fetch_array($result);
@@ -44,7 +44,7 @@ else {
         //если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
         $_SESSION['login']=$myrow['login'];
         $_SESSION['id']=$myrow['id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
-        header('Location: admin.php');
+        header('Location: ../admin.php');
 //        echo "Вы успешно вошли на сайт! <a href='admin.php'>Главная страница</a>";
     }
     else {

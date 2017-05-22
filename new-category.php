@@ -11,16 +11,21 @@ if (!isset($check_authentication)) {
 <html >
 <head>
     <meta charset="UTF-8">
-    <title>Новая статья</title>
+    <title>Добавление категории</title>
     <link rel="stylesheet" type="text/css" href="/media/assets/bootstrap-grid-only/css/grid12.css">
     <link rel="stylesheet" href="/media/css/new-article.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 <body>
-<div>
-    <button type='button'><a href='new-article.php'>Добавить статью</button><br/>
-    <button type='button'><a href='new-category.php'>Добавить категорию</button><br/>
-    <button type='button'><a href='edit-comments.php'>Редактировать комментарии</button><br/>
+<div style="margin: 10px;">
+    <a  style="color: white;" href="admin.php">Назад</a>
 </div>
+<div class="new-article">
+    <form name='new-category-form' action="services/add-category.php" method="post">
+        <section class="content__left col-md-8">
+            <input type="text" placeholder="Название категории" required = "" name="category_name" value="<?=$_SESSION['category_name']?>"><br/>
+            <input type="submit" value="Создать">
+        </section>
+    </form>
 </body>
 </html>

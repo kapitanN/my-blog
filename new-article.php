@@ -1,7 +1,13 @@
 <?php
-    require "includes/config.php";
-    session_start();
-    $categories_q = mysqli_query($connection,"SELECT * FROM `articles_categories`");
+require "includes/config.php";
+session_start();
+$categories_q = mysqli_query($connection,"SELECT * FROM `articles_categories`");
+$check_authentication = $_SESSION['login'];
+if (!isset($check_authentication)) {
+    echo "Вы не вошли под своей учетной записью."."<br/>";
+    echo "<a href='admin-login.php'>Войти</a>";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html >
@@ -17,21 +23,21 @@
     <a  style="color: white;" href="admin.php">Назад</a>
 </div>
 <div class="new-article">
-    <form name='new-article-form' action="add-article.php" method="post">
+    <form name='new-article-form' action="services/add-article.php" method="post">
         <section class="content__left col-md-8">
             <input type="text" placeholder="Название статьи" required = "" name="title" value="<?=$_SESSION['title']?>"><br/>
             <input type="text" placeholder="Текст статьи" required = "" name="text" style="height: 200px;" value="<?= $_SESSION['text']?>"><br/>
 
         </section>
         <section class="content__right col-md-4">
-             <input type="text" placeholder="Добавить изображение к статье" required = "" name="image"><br/>
+            <input type="text" placeholder="Добавить изображение к статье" required = "" name="image"><br/>
             <p style="margin: 5px; color: white">Категория:</p>
             <select placeholder="Категория" required = "" name="category">
                 <?php
                 while ($cat = mysqli_fetch_assoc($categories_q)) {
                     ?>
                     <option><?php echo $cat['title']?></option>;
-                <?php
+                    <?php
                 }
                 ?>
             </select><br/>
